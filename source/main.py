@@ -1,12 +1,12 @@
 
 import pandas as pd
-
 import sys
 import os
 
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
 import correlation
+import EDA
 
 # Add the parent directory to the system path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -21,7 +21,7 @@ print(data.columns)
 
 # List of categorical and numerical columns
 categorical_columns = ['Target_Churn', 'Promotion_Response', 'Email_Opt_In']
-numerical_columns = ['Years_as_Customer', 'Annual_Income', 'Satisfaction_Score']
+numerical_columns = ['Years_as_Customer', 'Annual_Income', 'Satisfaction_Score','Num_of_Purchases','Average_Transaction_Amount','Num_of_Returns','Num_of_Support_Contacts']
 
 # Generate count plots for categorical features
 for col in categorical_columns:
@@ -58,7 +58,7 @@ for col in numerical_columns:
 correlation_matrix = correlation.compute_correlations(data)
 
 # Identify strong correlations
-strong_correlations = correlation.identify_high_correlations(correlation_matrix, threshold=0.8)
+strong_correlations = correlation.identify_high_correlations(correlation_matrix, threshold=0.9)
 if strong_correlations:
     print("Strong correlations found:", strong_correlations)
 else:
@@ -70,6 +70,8 @@ for pair in strong_correlations:
     print(f"Dropping feature: {feature_to_drop}")
     data = data.drop(columns=[feature_to_drop])
 
+
+data_cleaned = EDA.handle_missing_values(data)
 
 
 

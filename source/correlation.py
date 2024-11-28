@@ -32,7 +32,7 @@ def compute_correlations(data):
 
     return correlation_matrix
 
-def identify_high_correlations(correlation_matrix, threshold=0.8):
+def identify_high_correlations(correlation_matrix, threshold=0.9):
     """
     Identifies pairs of features with strong correlations.
 

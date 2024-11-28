@@ -37,7 +37,7 @@ def count_plot(data, column='Target_Churn', labels=None, title='Churn Distributi
     plt.xlabel('Category')
     plt.ylabel('Count')
     save_plot(fig, save_name)
-    plt.show()
+  
 
 
 def distribution_plot(data, column, bins=20, kde=True, color='blue', title='Distribution Plot', xlabel=None, save_name='distribution.png'):
@@ -60,7 +60,7 @@ def distribution_plot(data, column, bins=20, kde=True, color='blue', title='Dist
     plt.xlabel(xlabel if xlabel else column.replace('_', ' ').title())
     plt.ylabel('Frequency')
     save_plot(fig, save_name)
-    plt.show()
+    
 
 
 def boxplot_with_churn(data, feature_col, churn_col='Target_Churn', save_name='boxplot_churn.png'):
@@ -79,7 +79,7 @@ def boxplot_with_churn(data, feature_col, churn_col='Target_Churn', save_name='b
     plt.xlabel('Churn (True/False)')
     plt.ylabel(feature_col.replace('_', ' ').title())
     save_plot(fig, save_name)
-    plt.show()
+   
 
 
 def compare_tenure_with_churn(data, tenure_col='Years_as_Customer', churn_col='Target_Churn'):
@@ -103,4 +103,4 @@ def compare_tenure_with_churn(data, tenure_col='Years_as_Customer', churn_col='T
     plt.ylabel('Frequency')
     plt.legend()
     save_plot(fig, 'tenure_churn_histogram.png')
-    plt.show()
+   

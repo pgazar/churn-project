@@ -6,10 +6,13 @@ import os
 
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
+import correlation
 
 # Add the parent directory to the system path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import util.visual
+
+
 
 # Load the dataset
 file_path = './data/online_retail_customer_churn.csv'
@@ -47,6 +50,28 @@ for col in numerical_columns:
         churn_col='Target_Churn',
         save_name=f'{col}_vs_churn_boxplot.png'
     )
+
+
+
+
+# Compute correlations
+correlation_matrix = correlation.compute_correlations(data)
+
+# Identify strong correlations
+strong_correlations = correlation.identify_high_correlations(correlation_matrix, threshold=0.8)
+if strong_correlations:
+    print("Strong correlations found:", strong_correlations)
+else:
+    print("No strong correlations found.")
+
+# Optional: Drop redundant features
+for pair in strong_correlations:
+    feature_to_drop = pair[0]  # Choose one feature from the pair
+    print(f"Dropping feature: {feature_to_drop}")
+    data = data.drop(columns=[feature_to_drop])
+
+
+
 
 
 
